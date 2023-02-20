@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block details %}
+    <div class="container">
+        <form action="/" method="POST"> 
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Description</label>
+              <input type="text" class="form-control" name="desc" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+    <div class="container my-4"> 
+      <h1>Your To-Do List</h1>
+        <table class="table">
+            <!-- We want if the table is empty, it is not shown  -->
+              {% if allTodo | length == 0 %}
+                <div class="alert alert-dark" role="alert">
+                  No record found. Add your first To-Do right now!!!
+                </div>
+              {% else %}
+              <thead>
+                <tr>
+                  <th scope="col">S.No.</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date Created</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in allTodo %}
+                <tr>
+                <!-- <th scope="row">{{i.sno}}</th>  Won't work if some record is deleted  -->
+                <th>{{loop.index}}</th> <!-- Will work always -->
+                <td>{{i.title}}</td>
+                <td>{{i.desc}}</td>
+                <td>{{i.date_created}}</td>
+                <td>
+                  <a href="/update/{{i.sno}}" type="button" class="btn btn-success">Update</a>
+                  <a href="/delete/{{i.sno}}" type="button" class="btn btn-danger">Delete</a>
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+
+          </table>
+    </div>
+{% endblock details %}
