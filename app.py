@@ -79,7 +79,7 @@ def delete(sno):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host = "0.0.0.0", port = 5000)
+    app.run(debug=False, host = "0.0.0.0")
 
 
 # If we want the queries to be shown on the website instead of the file, we need to add something to the index.html
